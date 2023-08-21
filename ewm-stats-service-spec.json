@@ -1,0 +1,170 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Stat service API",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9090",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "StatsController",
+      "description": "API для работы со статистикой посещений"
+    }
+  ],
+  "paths": {
+    "/hit": {
+      "post": {
+        "tags": [
+          "StatsController"
+        ],
+        "summary": "Сохранение информации о том, что к эндпоинту был запрос",
+        "description": "Сохранение информации о том, что на uri конкретного сервиса был отправлен запрос пользователем. Название сервиса, uri и ip пользователя указаны в теле запроса.",
+        "operationId": "hit",
+        "requestBody": {
+          "description": "данные запроса",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EndpointHit"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Информация сохранена"
+          }
+        }
+      }
+    },
+    "/stats": {
+      "get": {
+        "tags": [
+          "StatsController"
+        ],
+        "summary": "Получение статистики по посещениям. Обратите внимание: значение даты и времени нужно закодировать (например используя java.net.URLEncoder.encode) ",
+        "operationId": "getStats",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Дата и время начала диапазона за который нужно выгрузить статистику (в формате \"yyyy-MM-dd HH:mm:ss\")",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Дата и время конца диапазона за который нужно выгрузить статистику (в формате \"yyyy-MM-dd HH:mm:ss\")",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uris",
+            "in": "query",
+            "description": "Список uri для которых нужно выгрузить статистику",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "unique",
+            "in": "query",
+            "description": "Нужно ли учитывать только уникальные посещения (только с уникальным ip)",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Статистика собрана",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ViewStats"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EndpointHit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор записи",
+            "format": "int64",
+            "readOnly": true,
+            "example": 1
+          },
+          "app": {
+            "type": "string",
+            "description": "Идентификатор сервиса для которого записывается информация",
+            "example": "ewm-main-service"
+          },
+          "uri": {
+            "type": "string",
+            "description": "URI для которого был осуществлен запрос",
+            "example": "/events/1"
+          },
+          "ip": {
+            "type": "string",
+            "description": "IP-адрес пользователя, осуществившего запрос",
+            "example": "192.163.0.1"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Дата и время, когда был совершен запрос к эндпоинту (в формате \"yyyy-MM-dd HH:mm:ss\")",
+            "example": "2022-09-06 11:00:23"
+          }
+        }
+      },
+      "ViewStats": {
+        "type": "object",
+        "properties": {
+          "app": {
+            "type": "string",
+            "description": "Название сервиса",
+            "example": "ewm-main-service"
+          },
+          "uri": {
+            "type": "string",
+            "description": "URI сервиса",
+            "example": "/events/1"
+          },
+          "hits": {
+            "type": "integer",
+            "description": "Количество просмотров",
+            "format": "int64",
+            "example": 6
+          }
+        }
+      }
+    }
+  }
+}

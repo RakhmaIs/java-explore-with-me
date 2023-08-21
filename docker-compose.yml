@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  stats-server:
+    ports:
+      - "9090:9090"
+
+  stats-db:
+    image: postgres:14-alpine
+
+  ewm-service:
+    ports:
+      - "8080:8080"
+
+  ewm-db:
+    image: postgres:14-alpine
