@@ -1,15 +1,59 @@
-version: '3.1'
+version: '3.8'
 services:
+
   stats-server:
+    build: ./ewm-stat-service/stat_server
+
+    image:
+      stat_server:latest
+    container_name: stat_server
+
     ports:
       - "9090:9090"
+      - "9091:9091"
 
-  stats-db:
-    image: postgres:14-alpine
+    depends_on:
+      - stats_service-db
+    environment:
+    - STAT_URL_DB=jdbc:postgresql://state_server-db:5432/stat_db
+    - STAT_USERNAME_DB=asd
+    - STAT_PASSWORD_DB=123
+
+
+  stats_service-db:
+    image: postgres:15-alpine
+    container_name: stat_server-db
+    ports:
+    - "6666:5432"
+    environment:
+    - POSTGRES_DB=stat_db
+    - POSTGRES_USER=asd
+    - POSTGRES_PASSWORD=123
+
 
   ewm-service:
+    build: ./ewm-main-service
+    image:
+     ewm-service:latest
+    container_name: ewm-service
+
     ports:
-      - "8080:8080"
+     - "8080:8080"
+     - "8081:8081"
+
+    depends_on:
+     - ewm-db
+    environment:
+      - MAIN_DB=jdbc:postgresql://postgres-main-db:5432/ewm_db
+      - MAIN_USER=postgres
+      - MAIN_PASSWORD=123
 
   ewm-db:
-    image: postgres:14-alpine
+    image: postgres:15
+    container_name: postgres-main-db
+    ports:
+     - "6464:5432"
+    environment:
+      - POSTGRES_DB=ewm_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
