@@ -36,28 +36,29 @@ public class StatServiceImpl implements StatService {
     @Transactional(readOnly = true)
     public List<StatResponseDto> readStat(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
         log.info("readStat - invoked");
-        List<StatResponseDto> statOut;
+
         if (start.isAfter(end)) {
             log.error("Error occurred: The start date cannot be later than the end date");
             throw new WrongTimeException("The start date cannot be later than the end date");
         }
+
         if (uris.isEmpty()) {
             if (unique) {
-                statOut = statServiceRepository.findAllByTimestampBetweenStartAndEndWithUniqueIp(start, end);
                 log.info("readStat - success - unique = true, uris empty");
+                return statServiceRepository.findAllByTimestampBetweenStartAndEndWithUniqueIp(start, end);
             } else {
-                statOut = statServiceRepository.findAllByTimestampBetweenStartAndEndWhereIpNotUnique(start, end);
                 log.info("readStat - success - unique = false, uris empty");
+                return statServiceRepository.findAllByTimestampBetweenStartAndEndWhereIpNotUnique(start, end);
             }
         } else {
             if (unique) {
-                statOut = statServiceRepository.findAllByTimestampBetweenStartAndEndWithUrisUniqueIp(start, end, uris);
                 log.info("readStat - success - unique = true, uris not empty");
+                return statServiceRepository.findAllByTimestampBetweenStartAndEndWithUrisUniqueIp(start, end, uris);
             } else {
-                statOut = statServiceRepository.findAllByTimestampBetweenStartAndEndWithUrisIpNotUnique(start, end, uris);
                 log.info("readStat - success - unique = false, uris not empty");
+                return statServiceRepository.findAllByTimestampBetweenStartAndEndWithUrisIpNotUnique(start, end, uris);
             }
         }
-        return statOut;
     }
 }
+

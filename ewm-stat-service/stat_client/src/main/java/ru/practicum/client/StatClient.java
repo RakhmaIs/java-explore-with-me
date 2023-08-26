@@ -38,13 +38,12 @@ public class StatClient extends BaseClient {
                     "end", encode(end),
                     "unique", unique);
             return get("/stats?start={start}&end={end}&unique={unique}", parameters);
-        } else {
-            parameters = Map.of("start", encode(start),
-                    "end", encode(end),
-                    "uris", String.join(",", uris),
-                    "unique", unique);
-            return get("/stats?start={start}&end={end}&unique={unique}&uris={uris}", parameters);
         }
+        parameters = Map.of("start", encode(start),
+                "end", encode(end),
+                "uris", String.join(",", uris),
+                "unique", unique);
+        return get("/stats?start={start}&end={end}&unique={unique}&uris={uris}", parameters);
     }
 
     private String encode(String value) {

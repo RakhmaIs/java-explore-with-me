@@ -9,10 +9,9 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class StatDto {
 
     @NotBlank(groups = Validator.Create.class)

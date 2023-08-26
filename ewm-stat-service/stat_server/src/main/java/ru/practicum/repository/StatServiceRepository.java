@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface StatServiceRepository extends JpaRepository<Stat, Long> {
 
-    @Query("select new ru.practicum.dto.StatResponseDto(stat.ip, stat.uri, count(stat.ip)) " +
+    @Query("select new ru.practicum.dto.StatResponseDto(stat.ip, stat.uri, count(distinct stat.ip)) " +
             "from Stat as stat " +
             "where stat.timestamp between ?1 and ?2 " +
             "group by stat.ip, stat.uri " +

@@ -12,9 +12,11 @@ import ru.practicum.dto.StatResponseDto;
 import ru.practicum.dto.Validator;
 import ru.practicum.service.StatService;
 
-import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static ru.practicum.utill.Constants.DATE_FORMAT;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -32,12 +34,12 @@ public class StatServiceController {
     }
 
     @GetMapping("/stats")
-    public ResponseEntity<List<StatResponseDto>> readStatEvent(@RequestParam("start") @Min(19) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
-                                                          @RequestParam("end") @Min(19) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
-                                                          @RequestParam(defaultValue = "") List<String> uris,
-                                                          @RequestParam(defaultValue = "false") boolean unique) {
+    public ResponseEntity<List<StatResponseDto>> readStatEvent(@RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime start,
+                                                               @RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime end,
+                                                               @RequestParam(defaultValue = "") List<String> uris,
+                                                               @RequestParam(defaultValue = "false") boolean unique) {
         List<StatResponseDto> stats = statService.readStat(start, end, uris, unique);
         log.info("Returning response from GET request to: /stats/ endpoint - stat size = {}", stats.size());
-        return new ResponseEntity<>((stats), HttpStatus.OK);
+        return new ResponseEntity<>(stats, HttpStatus.OK);
     }
 }

@@ -5,9 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
 @EqualsAndHashCode
 @Entity

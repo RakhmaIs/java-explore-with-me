@@ -4,9 +4,6 @@ import lombok.*;
 
 @Data
 @Builder
-@EqualsAndHashCode
-@Getter
-@Setter
 @NoArgsConstructor
 public class StatResponseDto {
 
