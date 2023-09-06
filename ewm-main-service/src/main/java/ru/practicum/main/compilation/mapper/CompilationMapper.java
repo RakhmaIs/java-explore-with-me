@@ -22,7 +22,7 @@ public class CompilationMapper {
                 .build();
     }
 
-    public static CompilationDto toCompilationDto(Compilation compilation) {//добавил
+    public static CompilationDto toCompilationDto(Compilation compilation) {
         List<EventShortDto> eventShortDtoList = compilation.getEvents().stream()
                 .map(EventMapper::toEventShortDto)
                 .collect(Collectors.toList());
@@ -35,7 +35,7 @@ public class CompilationMapper {
                 .build();
     }
 
-    public static List<CompilationDto> toCompilationDtoList(List<Compilation> compilations) {//добавил
+    public static List<CompilationDto> toCompilationDtoList(List<Compilation> compilations) {
         return compilations.stream()
                 .map(CompilationMapper::toCompilationDto)
                 .collect(Collectors.toList());
