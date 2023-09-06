@@ -28,8 +28,8 @@ public class StatServiceController {
 
     @PostMapping("/hit")
     public ResponseEntity<StatDto> addStatEvent(@RequestBody @Validated(Validator.Create.class) StatDto statDto) {
+        log.info("Calling the POST request to /hit endpoint");
         StatDto statEvent = statService.createStat(statDto);
-        log.info("Returning response from POST request to /hit/ endpoint - statDto = {}", statDto);
         return new ResponseEntity<>(statEvent, HttpStatus.CREATED);
     }
 
@@ -38,8 +38,8 @@ public class StatServiceController {
                                                                @RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime end,
                                                                @RequestParam(defaultValue = "") List<String> uris,
                                                                @RequestParam(defaultValue = "false") boolean unique) {
+        log.info("Calling the GET request to /stats endpoint");
         List<StatResponseDto> stats = statService.readStat(start, end, uris, unique);
-        log.info("Returning response from GET request to: /stats/ endpoint - stat size = {}", stats.size());
         return new ResponseEntity<>(stats, HttpStatus.OK);
     }
 }
