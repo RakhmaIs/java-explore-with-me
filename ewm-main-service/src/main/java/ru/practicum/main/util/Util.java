@@ -5,7 +5,7 @@ import org.springframework.data.domain.Sort;
 
 public class Util {
 
-    public final static String TIME_STRING = "yyyy-MM-dd HH:mm:ss";
+    public static final String TIME_STRING = "yyyy-MM-dd HH:mm:ss";
 
     private Util() {
 
