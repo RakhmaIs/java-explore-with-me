@@ -1,16 +1,12 @@
 package ru.practicum.main.request.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import ru.practicum.main.request.model.Request;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 public class RequestUpdateDto {
 
     private List<Request> conformedRequest = new ArrayList<>();

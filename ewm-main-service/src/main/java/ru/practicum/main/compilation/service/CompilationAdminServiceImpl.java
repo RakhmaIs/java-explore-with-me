@@ -36,10 +36,9 @@ public class CompilationAdminServiceImpl implements CompilationAdminService {
             throw new NotUniqueException("Title not unique");
         }
 
-        Set<Event> events = new HashSet<>();
-        if (request.getEvents() != null && request.getEvents().size() != 0) {
-            events = new HashSet<>(eventMainServiceRepository.findAllById(request.getEvents()));
-        }
+        Set<Event> events;
+        events = (request.getEvents() != null && request.getEvents().size() != 0) ?
+                new HashSet<>(eventMainServiceRepository.findAllById(request.getEvents())) : new HashSet<>();
 
         Compilation compilation = Compilation.builder()
                 .pinned(request.getPinned() != null && request.getPinned())

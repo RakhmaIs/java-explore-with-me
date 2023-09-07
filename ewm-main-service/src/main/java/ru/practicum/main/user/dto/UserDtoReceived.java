@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 
 @Data
 @Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDtoReceived {

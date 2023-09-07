@@ -7,13 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.Validator;
-import ru.practicum.main.request.dto.RequestDto;
-import ru.practicum.main.event.dto.RequestShortDto;
-import ru.practicum.main.event.dto.RequestShortUpdateDto;
-import ru.practicum.main.event.dto.EventFullDto;
-import ru.practicum.main.event.dto.EventRequestDto;
-import ru.practicum.main.event.dto.UpdateEventDto;
+import ru.practicum.main.event.dto.*;
 import ru.practicum.main.event.service.EventPrivateService;
+import ru.practicum.main.request.dto.RequestDto;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -60,7 +56,7 @@ public class EventPrivateController {
     public ResponseEntity<RequestShortUpdateDto> patchRequestByOwnerUser(@PathVariable Long userId, @PathVariable Long eventId,
                                                                          @RequestBody RequestShortDto requestShortDto) {
         log.info("Calling the PATCH request to users/{userId}/events/{eventId}/requests");
-        return ResponseEntity.ok(eventPrivateService.updateRequestByOwner(userId, eventId,requestShortDto));
+        return ResponseEntity.ok(eventPrivateService.updateRequestByOwner(userId, eventId, requestShortDto));
     }
 
     @GetMapping("/{userId}/events/{eventId}/requests")

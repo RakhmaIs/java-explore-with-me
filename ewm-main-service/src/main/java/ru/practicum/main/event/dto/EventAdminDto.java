@@ -7,11 +7,9 @@ import ru.practicum.main.event.location.model.Location;
 import java.time.LocalDateTime;
 
 
-@Getter
-@Setter
-@ToString
+
+@Data
 @Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventAdminDto {

@@ -26,7 +26,7 @@ public class CompilationAdminController {
         log.info("Calling the POST request to /admin/compilations endpoint");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(service.createCompilation((newCompilationDto)));
+                .body(service.createCompilation(newCompilationDto));
     }
 
     @DeleteMapping("/{compId}")

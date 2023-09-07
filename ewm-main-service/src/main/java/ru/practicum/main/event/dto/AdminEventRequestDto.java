@@ -1,7 +1,10 @@
 package ru.practicum.main.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.practicum.dto.Validator;
 import ru.practicum.main.event.location.dto.LocationDto;
 import ru.practicum.main.event.status.AdminEventStatus;
@@ -14,7 +17,6 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdminEventRequestDto {

@@ -1,17 +1,17 @@
 package ru.practicum.main.event.dto;
 
-import lombok.*;
-import ru.practicum.main.event.status.UserEventStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.practicum.main.event.location.model.Location;
+import ru.practicum.main.event.status.UserEventStatus;
 
 import java.time.LocalDateTime;
 
 
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatchEventDto {

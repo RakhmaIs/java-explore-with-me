@@ -6,11 +6,8 @@ import ru.practicum.main.request.dto.RequestDto;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Data
 @Builder
-@Setter
-@ToString
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestShortUpdateDto {

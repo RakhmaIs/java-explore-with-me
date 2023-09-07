@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestDto {

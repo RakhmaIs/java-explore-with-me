@@ -1,11 +1,11 @@
 package ru.practicum.main.event.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.practicum.main.category.model.Category;
 import ru.practicum.main.category.mapper.CategoryMapper;
+import ru.practicum.main.category.model.Category;
 import ru.practicum.main.event.dto.*;
-import ru.practicum.main.event.model.Event;
 import ru.practicum.main.event.location.mapper.LocationMapper;
+import ru.practicum.main.event.model.Event;
 import ru.practicum.main.user.mapper.UserMapper;
 
 import java.time.format.DateTimeFormatter;
@@ -72,11 +72,9 @@ public class EventMapper {
                 .paid(updateEventDto.getPaid())
                 .eventDate(updateEventDto.getEventDate())
                 .build();
-        if (updateEventDto.getLocation() == null) {
-            event.setLocation(null);
-        } else {
-            event.setLocation(LocationMapper.toLocation(updateEventDto.getLocation()));
-        }
+
+        event.setLocation(updateEventDto.getLocation() == null ? null : LocationMapper.toLocation(updateEventDto.getLocation()));
+
         return event;
     }
 
@@ -92,11 +90,9 @@ public class EventMapper {
                 .paid(adminEvent.getPaid())
                 .title(adminEvent.getTitle())
                 .build();
-        if (adminEvent.getLocation() == null) {
-            event.setLocation(null);
-        } else {
-            event.setLocation(LocationMapper.toLocation(adminEvent.getLocation()));
-        }
+
+        event.setLocation(adminEvent.getLocation() == null ? null : LocationMapper.toLocation(adminEvent.getLocation()));
+
         return event;
     }
 

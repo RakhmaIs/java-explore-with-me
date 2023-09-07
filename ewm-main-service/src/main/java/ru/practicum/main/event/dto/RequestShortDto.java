@@ -5,11 +5,8 @@ import ru.practicum.main.request.Status;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestShortDto {

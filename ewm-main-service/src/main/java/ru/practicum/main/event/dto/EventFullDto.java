@@ -6,11 +6,8 @@ import ru.practicum.main.event.location.dto.LocationDto;
 import ru.practicum.main.event.status.State;
 import ru.practicum.main.user.dto.UserDto;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventFullDto {

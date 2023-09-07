@@ -12,7 +12,7 @@ public interface CompilationMainServiceRepository extends JpaRepository<Compilat
 
     @Query("SELECT c " +
             "FROM Compilation c " +
-            "WHERE c.pinned = ?1 OR (c.pinned = false OR c.pinned = true) ")
+            "WHERE c.pinned = ?1")
     List<Compilation> findAllByPinned(Boolean pinned, Pageable pageable);
 
     boolean existsByTitle(String title);
