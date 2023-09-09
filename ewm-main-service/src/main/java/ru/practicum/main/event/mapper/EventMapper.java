@@ -161,7 +161,7 @@ public class EventMapper {
                 .views(event.getView())
                 .build();
     }
-    public EventCommentDto  toEventComment(Event event) {
+    public EventCommentDto toEventComment(Event event) {
         return EventCommentDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())
