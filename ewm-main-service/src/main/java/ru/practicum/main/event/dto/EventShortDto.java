@@ -20,12 +20,15 @@ public class EventShortDto {
 
     private String eventDate;
 
-    private UserShortDto initiator;// исправил было UserDto
+    private UserShortDto initiator;
 
     private Boolean paid;
 
     private String title;
 
     private Long views;
+
+    private Long commentCount;
+
 }
 

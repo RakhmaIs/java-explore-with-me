@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.main.comment.service.PrivateCommentService;
 import ru.practicum.main.event.status.State;
 import ru.practicum.main.event.dto.EventFullDto;
 import ru.practicum.main.event.dto.EventShortDto;
@@ -32,6 +33,8 @@ public class EventPublicServiceImpl implements EventPublicService {
 
     private final StatService statService;
 
+    private final PrivateCommentService privateCommentService;
+
 
     @Override
     public List<EventShortDto> readPublicEvents(String text, List<Long> categories, Boolean paid, LocalDateTime rangeStart,
@@ -45,11 +48,12 @@ public class EventPublicServiceImpl implements EventPublicService {
 
         Map<Long, Long> confirmedRequest = statService.toConfirmedRequest(list);
         Map<Long, Long> view = statService.toView(list);
+        Map<Long, Long> commentCount = privateCommentService.getCommentCount(list);
 
         List<EventDto> events = new ArrayList<>();
 
-        list.forEach(event -> events.add(EventMapper.toEventShort(event, view.getOrDefault(event.getId(), 0L),
-                confirmedRequest.getOrDefault(event.getId(), 0L))));
+        list.forEach(event -> events.add(EventMapper.toEventDto(event, view.getOrDefault(event.getId(), 0L),
+                confirmedRequest.getOrDefault(event.getId(), 0L), commentCount.getOrDefault(event.getId(), 0L))));
 
         statService.addHits(request);
         log.info("Result: list event size = {}", events.size());
