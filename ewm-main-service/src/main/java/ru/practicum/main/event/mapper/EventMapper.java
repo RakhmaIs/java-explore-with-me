@@ -3,8 +3,6 @@ package ru.practicum.main.event.mapper;
 import lombok.experimental.UtilityClass;
 import ru.practicum.main.category.mapper.CategoryMapper;
 import ru.practicum.main.category.model.Category;
-import ru.practicum.main.comment.mapper.CommentMapper;
-import ru.practicum.main.comment.model.Comment;
 import ru.practicum.main.event.dto.*;
 import ru.practicum.main.event.location.mapper.LocationMapper;
 import ru.practicum.main.event.model.Event;
