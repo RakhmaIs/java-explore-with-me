@@ -148,7 +148,7 @@ public class EventMapper {
         return list.stream().map(EventMapper::toEventShort).collect(Collectors.toList());
     }
 
-    public static EventShortDto toEventShortDto(Event event) { //добавил
+    public static EventShortDto toEventShortDto(Event event) {
         return EventShortDto.builder()
                 .annotation(event.getAnnotation())
                 .category(CategoryMapper.toCategoryDto(event.getCategory()))
@@ -167,5 +167,4 @@ public class EventMapper {
                 .title(event.getTitle())
                 .build();
     }
-
 }
