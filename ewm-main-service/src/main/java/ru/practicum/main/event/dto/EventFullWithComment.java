@@ -1,6 +1,9 @@
 package ru.practicum.main.event.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.practicum.main.category.model.Category;
 import ru.practicum.main.comment.model.Comment;
 import ru.practicum.main.event.location.model.Location;
@@ -9,11 +12,8 @@ import ru.practicum.main.user.model.User;
 
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventFullWithComment {
